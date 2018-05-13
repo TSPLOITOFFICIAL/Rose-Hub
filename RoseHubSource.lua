@@ -1,7 +1,8 @@
 local start = tick()
+print'Rose Hub Dev Ver 3.0.1'
 print"Rose Hub process started."
---local coreGui = game:GetService("CoreGui")
-local coreGui = game:GetService("Players").LocalPlayer.PlayerGui
+local coreGui = game:GetService("CoreGui")
+--local coreGui = game:GetService("Players").LocalPlayer.PlayerGui
 local tweening = false
 local scriptsTabText = ""
 local feTabText = ""
