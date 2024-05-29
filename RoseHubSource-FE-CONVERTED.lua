@@ -1,3 +1,130 @@
+-- i discovered it, NOT CREATED.
+
+sethiddenproperty(game.Players.LocalPlayer,"MaximumSimulationRadius",math.huge)
+sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",1.0000000331814e+32)
+ 
+for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+if v:IsA("BasePart") then--and v.Name ~="HumanoidRootPart" then 
+game:GetService("RunService").Heartbeat:connect(function()
+v.Velocity = Vector3.new(0,-25.05,0)
+wait(0.5)
+end)
+end
+end
+ 
+local char = workspace[game.Players.LocalPlayer.Name]
+char.Archivable = true
+ 
+local fakechar = char:Clone()
+fakechar.Name = 'clone'
+fakechar.Parent = char
+fakechar.Head.face.Transparency = 1
+workspace.CurrentCamera.CameraSubject = fakechar
+char.Torso.Anchored = true
+ 
+local connections = {}
+ 
+function create(part, parent, p, r)
+part.AccessoryWeld:Remove()
+Instance.new("Attachment",part)
+Instance.new("AlignPosition",part)
+Instance.new("AlignOrientation",part)
+Instance.new("Attachment",parent)
+part.AlignPosition.Attachment0 = part.Attachment
+part.AlignOrientation.Attachment0 = part.Attachment
+part.AlignPosition.Attachment1 = parent.Attachment
+part.AlignOrientation.Attachment1 = parent.Attachment
+part.Attachment.Position = p
+part.Attachment.Orientation = r
+part.AlignPosition.MaxForce = 999999999
+part.AlignPosition.MaxVelocity = math.huge
+part.AlignPosition.ReactionForceEnabled = false
+part.AlignPosition.Responsiveness = math.huge
+part.AlignOrientation.Responsiveness = 200
+part.AlignPosition.RigidityEnabled = false
+part.AlignOrientation.MaxTorque = 999999999
+end
+ 
+local hats = {
+Torso = char:FindFirstChild('Hat1').Handle,
+Torso1 = char:FindFirstChild('Robloxclassicred').Handle,
+LeftArm = char:FindFirstChild('Pink Hair').Handle,
+RightArm = char:FindFirstChild('Pal Hair').Handle,
+LeftLeg = char:FindFirstChild('Kate Hair').Handle,
+RightLeg = char:FindFirstChild('LavanderHair').Handle,
+Head = char:FindFirstChild('Type-49 Abomindation Back Accessory').Handle
+}
+ 
+function rmesh(HatName)
+for _,mesh in next, workspace[game.Players.LocalPlayer.Name][HatName]:GetDescendants() do
+if mesh:IsA("Mesh") or mesh:IsA("SpecialMesh") then
+mesh:Remove()
+end
+end
+end
+ 
+game:GetService('RunService').Heartbeat:connect(function()
+    hats.Torso.Velocity = Vector3.new(30,0,0)
+    hats.Torso1.Velocity = Vector3.new(30,0,0)
+    hats.LeftArm.Velocity = Vector3.new(30,0,0)
+    hats.RightArm.Velocity = Vector3.new(30,0,0)
+    hats.LeftLeg.Velocity = Vector3.new(30,0,0)
+    hats.RightLeg.Velocity = Vector3.new(30,0,0)
+    hats.Head.Velocity = Vector3.new(30,0,0)
+end)
+ 
+table.insert(connections, game:GetService('RunService').Stepped:Connect(function()
+fakechar.Torso.CanCollide = false
+fakechar.Head.CanCollide = false
+end))
+ 
+ 
+create(hats.Torso, fakechar['Torso'], Vector3.new(.5,0,0), Vector3.new(90,0,0))
+create(hats.Torso1, fakechar['Torso'], Vector3.new(-.5,0,0), Vector3.new(90,0,0))
+create(hats.LeftArm, fakechar['Left Arm'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.RightArm, fakechar['Right Arm'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.LeftLeg, fakechar['Left Leg'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.RightLeg, fakechar['Right Leg'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.Head, fakechar['Head'], Vector3.new(), Vector3.new(90,0,0))
+ 
+rmesh('Hat1')
+rmesh('Robloxclassicred')
+rmesh('Pink Hair')
+rmesh('Pal Hair')
+rmesh('Kate Hair')
+rmesh('LavanderHair')
+ 
+local kill = false
+ 
+for i,v in next, fakechar:GetDescendants() do
+if v:IsA("BasePart") then
+v.Transparency = 1
+end
+end
+ 
+fakechar.Humanoid.Died:Connect(function()
+   game.Players.LocalPlayer.Character = char
+   char:BreakJoints()
+   fakechar:Destroy()
+kill = true
+ 
+   for _,v in pairs(connections) do v:Disconnect() end
+end)
+char.Humanoid.Died:Connect(function()
+   game.Players.LocalPlayer.Character = char
+   char:BreakJoints()
+   fakechar:Destroy()
+kill = true
+ 
+   for _,v in pairs(connections) do v:Disconnect() end
+end)
+ 
+game.Players.LocalPlayer.Character = fakechar
+
+
+
+
+
 local start = tick()
 print'Rose Hub Dev Ver 3.0.1'
 print"Rose Hub process started."
