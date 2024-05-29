@@ -1,3 +1,38 @@
+local Global = (getgenv and getgenv()) or shared
+Global.GelatekReanimateConfig = {
+    -- [[ Rig Settings ]] --
+    ["AnimationsDisabled"] = false,
+    ["R15ToR6"] = true,
+    ["DontBreakHairWelds"] = true,
+    ["PermanentDeath"] = false,
+    ["Headless"] = false,
+    ["TeleportBackWhenVoided"] = true,
+    
+    -- [[ Reanimation Settings ]] --
+    ["AlignReanimate"] = true,
+    ["FullForceAlign"] = false,
+    ["FasterHeartbeat"] = false,
+    ["DynamicalVelocity"] = false,
+    ["DisableTweaks"] = false,
+    
+    -- [[ Optimization ]] --
+    ["OptimizeGame"] = false,
+
+    -- [[ Miscellacious ]] --
+    ["LoadLibrary"] = true,
+    ["DetailedCredits"] = false,
+    
+    -- [[ Flinging Methods ]] --
+    ["TorsoFling"] = true,
+    ["BulletEnabled"] = false,
+    ["BulletConfig"] = {
+        ["RunAfterReanimate"] = false,
+        ["LockBulletOnTorso"] = false
+    }
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekReanimate/main/Main.lua"))()
+
+
 local start = tick()
 print'Rose Hub Dev Ver 3.0.1'
 print"Rose Hub process started."
